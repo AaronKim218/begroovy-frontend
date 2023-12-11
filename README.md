@@ -1,31 +1,70 @@
-## BeGroovy | Oasis Spring 2023
-**Created by**: Laith Taher, Aaron Kim, Joseph Kim, Vidyut Ramanan and Kaito Minami
+# Getting Started with Create React App
 
-**Brand Art/Design by**: Amanda Rabin and Audrey Morga
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Due to our [Spotify for Developers](https://developer.spotify.com/) app not being extended, our site is currently not being hosted on a domain.
-If you would like to check out BeGroovy, you may self host it by doing these steps:
+## Available Scripts
 
-- Clone the repository using `git clone https://github.com/LOTaher/BeGroovy.git` in a new environment.
+In the project directory, you can run:
 
-- Run `npm install` once inside the directory.
+### `npm start`
 
-- Go to [Supabase](https://supabase.com/) and create a new project.
-  - Find your `Project URL` and `Project API Key` by going to **Settings** -> **API**. Add both of them to your `.env` file in the project's main directory. 
-  - Under **Database**, create a new table called `Posts`. In this table copy, [each of these columns](https://imgur.com/a/zs9h639).
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-- Create a [Spotify Developer](https://developer.spotify.com/) account, then create a new app. This can be called whatever you'd like. 
-  - Under your project's settings, add both the `Client ID` and the `Client Secret` to the `.env` file.
-  
-Once completed run `npm run dev` in the main directory and enjoy!
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-### Contributing
-We don't have much of a policy so if you'd like to contribute to the project, feel free to file a pull request.
+### `npm test`
 
-If you're curious to see what our presentation looked like at Demo Day, then check out this [link](https://docs.google.com/presentation/d/1Waid320x178V1s_AMj-3rzG9FVzUT62XVzuRCgoBoYw/edit?usp=sharing)! Here is our project listed on the Oasis [website](https://valuable-banjo-220.notion.site/BeGroovy-3bdf477afc7941938bf49be8902d3678)!
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-![Logo](https://media.discordapp.net/attachments/926427375091208242/1094706300740452452/BeGroovy.png?width=887&height=293)
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-  
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
