@@ -1,15 +1,7 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createUserApi } from "./userApi";
+import { createAuthApi } from "./authApi";
 
-export const apiSlice = createApi({
-  reducerPath: 'api', // Optional: Define the slice's name
-  baseQuery: fetchBaseQuery({ baseUrl: '/your/api/url' }),
-  endpoints: (builder) => ({
-    // Define your endpoints here
-    getExample: builder.query({
-      query: (id) => `example/${id}`,
-    }),
-    // You can add more queries and mutations
-  }),
-});
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-export const { useGetExampleQuery } = apiSlice;
+export const userApi = createUserApi(API_BASE_URL);
+export const authApi = createAuthApi(API_BASE_URL);
