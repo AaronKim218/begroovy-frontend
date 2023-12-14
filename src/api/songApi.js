@@ -12,7 +12,7 @@ export const createSongApi = (baseUrl) =>
         query: (sid) => `/data/${sid}`,
       }),
       searchSongs: builder.query({
-        query: (song, artist, limit, offset) => `/search?song=${song}&artist=${artist}&limit=${limit}&offset=${offset}`,
+        query: ({song, artist, limit, offset}) => `/search?song=${song}&artist=${artist}&limit=${limit}&offset=${offset}`,
       }),
     }),
   });

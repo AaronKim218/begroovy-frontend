@@ -17,7 +17,7 @@ function Navbar() {
                 console.log(data);
                 dispatch(resetUser());
             })
-        navigate('/');
+        navigate('/login');
     };
 
 

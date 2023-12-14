@@ -5,9 +5,16 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Posts from './pages/Posts';
 import Profile from './pages/Profile';
+import ReadOnlyPosts from './pages/ReadOnlyPosts';
+import Groups from './pages/Groups';
+import ArtistGroup from './pages/ArtistGroup';
 import Unknown from './pages/Unknown';
+import { useSelector } from 'react-redux';
 
 function App() {
+
+  const user = useSelector(state => state.user);
+
   return (
     <BrowserRouter>
       <NavBar />
@@ -16,8 +23,10 @@ function App() {
           <Route path="/" element={<Home />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
-          <Route path="/posts" element={<Posts />}/>
+          <Route path="/posts" element={user._id !== '' ? <Posts /> : <ReadOnlyPosts />}/>
           <Route path="/profile" element={<Profile />}/>
+          <Route path="/groups" element={<Groups />}/>
+          <Route path="/groups/:id" element={<ArtistGroup />}/>
           <Route path="*" element={<Unknown />}/>
         </Routes>
       </div>

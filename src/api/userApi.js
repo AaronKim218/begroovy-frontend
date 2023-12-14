@@ -11,6 +11,12 @@ export const createUserApi = (baseUrl) =>
       getUserById: builder.query({
         query: (_id) => `/${_id}`,
       }),
+      getListenerStatsById: builder.query({
+        query: (_id) => `/listener/stats/${_id}`,
+      }),
+      getArtistStatsById: builder.query({
+        query: ({_id, spotifyId}) => `/artist/stats/${_id}?artistId=${spotifyId}`,
+      }),
       createUser: builder.mutation({
         query: (body) => ({
           body,
@@ -22,6 +28,12 @@ export const createUserApi = (baseUrl) =>
         query: ({_id, body}) => ({
           body,
           method: "PUT",
+          url: `/${_id}`,
+        }),
+      }),
+      deleteUser: builder.mutation({
+        query: (_id) => ({
+          method: "DELETE",
           url: `/${_id}`,
         }),
       }),
