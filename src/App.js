@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './Pages/Home';
 import NavBar from './components/NavBar/NavBar';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Posts from './pages/Posts';
-import Profile from './pages/Profile';
-import ReadOnlyPosts from './pages/ReadOnlyPosts';
-import Groups from './pages/Groups';
-import ArtistGroup from './pages/ArtistGroup';
-import Unknown from './pages/Unknown';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import Posts from './Pages/Posts';
+import Profile from './Pages/Profile';
+import ReadOnlyPosts from './Pages/ReadOnlyPosts';
+import Groups from './Pages/Groups';
+import ArtistGroup from './Pages/ArtistGroup';
+import Unknown from './Pages/Unknown';
 import { useSelector } from 'react-redux';
 
 function App() {
