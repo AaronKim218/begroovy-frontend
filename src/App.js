@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Posts from './pages/Posts';
+import Profile from './pages/Profile';
 import Unknown from './pages/Unknown';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
           <Route path="/posts" element={<Posts />}/>
+          <Route path="/profile" element={<Profile />}/>
           <Route path="*" element={<Unknown />}/>
         </Routes>
       </div>

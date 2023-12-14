@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    id: '',
+    _id: '',
     username: '',
     password: '',
     firstName: '',
     lastName: '',
     role: '',
     spotifyId: '',
+    __v: 0,
 };
 
 const userSlice = createSlice({

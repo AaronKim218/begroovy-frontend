@@ -13,9 +13,8 @@ function Navbar() {
     const handleLogout = () => {
         logout()
             .unwrap()
-            .then((originalPromiseResult) => {
-                console.log('originalPromiseResult');
-                console.log(originalPromiseResult);
+            .then((data) => {
+                console.log(data);
                 dispatch(resetUser());
             })
         navigate('/');

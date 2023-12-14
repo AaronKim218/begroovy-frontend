@@ -9,13 +9,20 @@ export const createUserApi = (baseUrl) =>
     }),
     endpoints: (builder) => ({
       getUserById: builder.query({
-        query: (uid) => `/${uid}`,
+        query: (_id) => `/${_id}`,
       }),
       createUser: builder.mutation({
         query: (body) => ({
           body,
           method: "POST",
           url: "",
+        }),
+      }),
+      updateUser: builder.mutation({
+        query: ({_id, body}) => ({
+          body,
+          method: "PUT",
+          url: `/${_id}`,
         }),
       }),
     }),

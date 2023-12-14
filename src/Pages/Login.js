@@ -18,21 +18,9 @@ export default function Login() {
         console.log('password: ' + password);
         login({ username, password })
             .unwrap()
-            .then((originalPromiseResult) => {
-                console.log('originalPromiseResult');
-                console.log(originalPromiseResult);
-                const user = {
-                    id: originalPromiseResult._id,
-                    username: originalPromiseResult.username,
-                    password: originalPromiseResult.password,
-                    firstName: originalPromiseResult.firstName,
-                    lastName: originalPromiseResult.lastName,
-                    role: originalPromiseResult.role,
-                    spotifyArtistId: originalPromiseResult.spotifyArtistId,
-                }
-                console.log('user');
-                console.log(user);
-                dispatch(setUser(user));
+            .then((data) => {
+                console.log(data);
+                dispatch(setUser(data));
                 navigate('/posts');
             })
 
