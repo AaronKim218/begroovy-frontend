@@ -9,12 +9,17 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6', // Example primary color
-    },
-    secondary: {
-      main: '#19857b', // Example secondary color
+      main: '#0400ff', // Example primary color
     },
     inactive: '#D3D3D3',
+    listener: '#FFFF99',
+    artist: '#9932CC',
+  },
+  typography: {
+    fontFamily: [
+      'Lato',
+      'sans-serif',
+    ].join(','),
   },
 });
 
