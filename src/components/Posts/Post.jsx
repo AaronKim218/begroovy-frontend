@@ -138,7 +138,7 @@ useEffect(() => {
         const theme = useTheme();
 
         return (
-            <Card sx={{ maxWidth: 500 }}>
+            <Card sx={{ width: 500, height: 600 }}>
                 <CardMedia
                 sx={{ height: 400 }}
                 image={songData.albumCoverImageUrl}
