@@ -8,11 +8,11 @@ export const createSongApi = (baseUrl) =>
       credentials: "include",
     }),
     endpoints: (builder) => ({
-      getSongDataBySid: builder.query({
-        query: (sid) => `/data/${sid}`,
+      getSongBySpotifyId: builder.query({
+        query: (spotifyId) => `/${spotifyId}`,
       }),
       searchSongs: builder.query({
-        query: ({song, artist, limit, offset}) => `/search?song=${song}&artist=${artist}&limit=${limit}&offset=${offset}`,
+        query: ({title, artist, limit, offset}) => `/search?title=${title}&artist=${artist}&limit=${limit}&offset=${offset}`,
       }),
     }),
   });
