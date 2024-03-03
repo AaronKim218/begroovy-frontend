@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { Post } from '../main.types';
 
-export const createPostApi = (baseUrl) => 
+export const createPostApi = (baseUrl: string) => 
   createApi({
     reducerPath: 'postApi',
     baseQuery: fetchBaseQuery({
@@ -8,44 +9,44 @@ export const createPostApi = (baseUrl) =>
       credentials: "include",
     }),
     endpoints: (builder) => ({
-      getAllPosts: builder.query({
+      getAllPosts: builder.query<Post[], void>({
         query: () => '',
       }),
-      getPostByPid: builder.query({
+      getPostByPid: builder.query<Post, string>({
         query: (pid) => `/${pid}`,
       }),
-      likePost: builder.mutation({
+      likePost: builder.mutation<Post, { pid: string, uid: string }>({
         query: ({pid, uid}) => ({
           method: "PUT",
           url: `/${pid}/like/${uid}`,
         }),
       }),
-      dislikePost: builder.mutation({
+      dislikePost: builder.mutation<Post, { pid: string, uid: string }>({
         query: ({pid, uid}) => ({
           method: "PUT",
           url: `/${pid}/dislike/${uid}`,
         }),
       }),
-      unlikePost: builder.mutation({
+      unlikePost: builder.mutation<Post, { pid: string, uid: string }>({
         query: ({pid, uid}) => ({
           method: "PUT",
           url: `/${pid}/unlike/${uid}`,
         }),
       }),
-    undislikePost: builder.mutation({
+    undislikePost: builder.mutation<Post, { pid: string, uid: string } >({
         query: ({pid, uid}) => ({
         method: "PUT",
         url: `/${pid}/undislike/${uid}`,
         }),
     }),
-    createPost: builder.mutation({
+    createPost: builder.mutation<Post, Post>({
         query: (body) => ({
           body,
           method: "POST",
           url: "",
         }),
       }),
-      deletePost: builder.mutation({
+      deletePost: builder.mutation<Post, string>({
         query: (pid) => ({
           method: "DELETE",
           url: `/${pid}`,

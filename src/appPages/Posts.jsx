@@ -42,8 +42,9 @@ export default function Posts() {
   const closePostModal = () => setIsPostModalOpen(false);
 
   const handlePostSubmit = (song) => {
+    console.log("user", user);
     const body = {
-      creator: user._id,
+      creator: user.user._id,
       song: song,
       likes: [],
       dislikes: [],

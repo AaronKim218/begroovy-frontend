@@ -10,7 +10,6 @@ import {
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { songApi } from "../../api/api";
 import { userApi } from "../../api/api";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -28,12 +27,7 @@ export default function Post({ pid, readOnly = false }) {
     error: postError,
     refetch: refetchPost,
   } = postApi.useGetPostByPidQuery(pid);
-  console.log("here brudda");
   console.log(postData);
-  const { data: songData, error: songError } =
-    songApi.useGetSongBySpotifyIdQuery(postData?.song.spotifyId, {
-      skip: !postData,
-    });
   const { data: userData, error: userError } = userApi.useGetUserByIdQuery(
     postData?.creator,
     {
@@ -49,12 +43,15 @@ export default function Post({ pid, readOnly = false }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (postData && songData && userData) {
+    console.log("useEffect happeining");
+    console.log(postData);
+    console.log(userData);
+    if (postData && userData) {
       setPageStatus("SUCCESS");
-    } else if (postError || songError || userError) {
+    } else if (postError || userError) {
       setPageStatus("ERROR");
     }
-  }, [postData, songData, userData, postError, songError, userError]);
+  }, [postData, userData, postError, userError]);
 
   const handleLike = () => {
     if (liked) {
@@ -156,23 +153,25 @@ export default function Post({ pid, readOnly = false }) {
 
   const PageSuccess = () => {
     const theme = useTheme();
+    console.log("post", postData);
 
     return (
       <Card sx={{ width: 500, height: 600 }}>
         <CardMedia
           sx={{ height: 400 }}
-          image={songData.image}
-          title={songData.album}
+          image={postData.song.image}
+          title={postData.song.album}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {songData.title}
+            {postData.song.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Artist: {songData.artists.map((artist) => artist.name).join(", ")}
+            Artist:{" "}
+            {postData.song.artists.map((artist) => artist.name).join(", ")}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Album: {songData.album}
+            Album: {postData.song.album}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Posted by: {userData.firstName} {userData.lastName} on{" "}
@@ -199,7 +198,7 @@ export default function Post({ pid, readOnly = false }) {
                   style={{
                     color: liked
                       ? theme.palette.primary.main
-                      : theme.palette.inactive,
+                      : theme.palette.secondary.main,
                   }}
                 >
                   <ThumbUpIcon />
@@ -211,7 +210,7 @@ export default function Post({ pid, readOnly = false }) {
                   style={{
                     color: disliked
                       ? theme.palette.primary.main
-                      : theme.palette.inactive,
+                      : theme.palette.secondary.main,
                   }}
                 >
                   <ThumbDownIcon />

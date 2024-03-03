@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { User } from '../main.types';
 
-export const createUserApi = (baseUrl) => 
+export const createUserApi = (baseUrl: string) => 
   createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({
@@ -8,30 +9,24 @@ export const createUserApi = (baseUrl) =>
       credentials: "include",
     }),
     endpoints: (builder) => ({
-      getUserById: builder.query({
+      getUserById: builder.query<User, string>({
         query: (_id) => `/${_id}`,
       }),
-      getListenerStatsById: builder.query({
-        query: (_id) => `/listener/stats/${_id}`,
-      }),
-      getArtistStatsById: builder.query({
-        query: ({_id, spotifyId}) => `/artist/stats/${_id}?artistId=${spotifyId}`,
-      }),
-      createUser: builder.mutation({
+      createUser: builder.mutation<User, User>({
         query: (body) => ({
           body,
           method: "POST",
           url: "",
         }),
       }),
-      updateUser: builder.mutation({
+      updateUser: builder.mutation<User, { _id: string, body: User }>({
         query: ({_id, body}) => ({
           body,
           method: "PUT",
           url: `/${_id}`,
         }),
       }),
-      deleteUser: builder.mutation({
+      deleteUser: builder.mutation<User, string>({
         query: (_id) => ({
           method: "DELETE",
           url: `/${_id}`,
