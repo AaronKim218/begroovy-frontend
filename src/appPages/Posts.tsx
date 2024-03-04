@@ -84,11 +84,6 @@ export default function Posts() {
         const [artist, setArtist] = useState("");
         const [params, setParams] = useState<SearchSongsParams>();
         const [songs, setSongs] = useState<Song[]>([]);
-
-        // const { data: songsResponse, isLoading: songsLoading } = songApi.useSearchSongsQuery(params!, {
-        //     skip: !params,
-        // });
-
         const { data: songsResponse, isLoading: songsLoading } = songApi.useSearchSongsQuery(params ?? skipToken);
 
 

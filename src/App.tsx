@@ -5,8 +5,6 @@ import Login from "./appPages/Login";
 import Register from "./appPages/Register";
 import Posts from "./appPages/Posts";
 import Profile from "./appPages/Profile";
-import Groups from "./appPages/Groups";
-import ArtistGroup from "./appPages/ArtistGroup";
 import Unknown from "./appPages/Unknown";
 import ReadOnlyPosts from "./appPages/ReadOnlyPosts";
 import { useAppSelector } from "./hooks/use-redux";
@@ -27,8 +25,6 @@ function App() {
                         element={userState.user ? <Posts /> : <ReadOnlyPosts />}
                     />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/groups" element={<Groups />} />
-                    <Route path="/groups/:id" element={<ArtistGroup />} />
                     <Route path="*" element={<Unknown />} />
                 </Routes>
             </div>

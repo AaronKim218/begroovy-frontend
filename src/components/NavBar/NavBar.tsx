@@ -34,9 +34,6 @@ function Navbar() {
                 <Button color="inherit" component={RouterLink} to="/posts">
                     Posts
                 </Button>
-                <Button color="inherit" component={RouterLink} to="/groups">
-                    Groups
-                </Button>
                 <Button color="inherit" component={RouterLink} to="/login">
                     Login
                 </Button>

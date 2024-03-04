@@ -19,7 +19,7 @@ export const createUserApi = (baseUrl: string) =>
                     url: "",
                 }),
             }),
-            updateUser: builder.mutation<User, { _id: string, body: User }>({
+            updateUser: builder.mutation<User, { _id: string, body: UserCreation }>({
                 query: ({ _id, body }) => ({
                     body,
                     method: "PUT",
