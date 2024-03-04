@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { authApi } from '../api/api';
 import { setUser } from '../store/userSlice';
 import { useDispatch } from 'react-redux';
+import { Credentials } from '../api/types';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -12,9 +13,13 @@ export default function Login() {
     const [login] = authApi.useLoginMutation();
     const dispatch = useDispatch();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        login({ username, password })
+        const credentials: Credentials = {
+            username,
+            password,
+        };
+        login(credentials)
             .unwrap()
             .then((data) => {
                 console.log(data);

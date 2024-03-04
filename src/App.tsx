@@ -12,28 +12,28 @@ import ReadOnlyPosts from "./appPages/ReadOnlyPosts";
 import { useAppSelector } from "./hooks/use-redux";
 
 function App() {
-  const user = useAppSelector((state) => state.user);
+    const userState = useAppSelector((state) => state.user);
 
-  return (
-    <BrowserRouter>
-      <NavBar />
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/posts"
-            element={user.user._id !== "" ? <Posts /> : <ReadOnlyPosts />}
-          />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/groups" element={<Groups />} />
-          <Route path="/groups/:id" element={<ArtistGroup />} />
-          <Route path="*" element={<Unknown />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <NavBar />
+            <div>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route
+                        path="/posts"
+                        element={userState.user ? <Posts /> : <ReadOnlyPosts />}
+                    />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/groups" element={<Groups />} />
+                    <Route path="/groups/:id" element={<ArtistGroup />} />
+                    <Route path="*" element={<Unknown />} />
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

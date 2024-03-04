@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Post } from '../main.types';
+import { Post, PostCreation } from '../main.types';
 
 export const createPostApi = (baseUrl: string) => 
   createApi({
@@ -39,7 +39,7 @@ export const createPostApi = (baseUrl: string) =>
         url: `/${pid}/undislike/${uid}`,
         }),
     }),
-    createPost: builder.mutation<Post, Post>({
+    createPost: builder.mutation<Post, PostCreation>({
         query: (body) => ({
           body,
           method: "POST",
