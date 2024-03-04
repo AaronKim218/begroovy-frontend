@@ -11,29 +11,30 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { userApi } from "../../api/api";
+import { useAppSelector } from "../../hooks/use-redux";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { postApi } from "../../api/api";
 import { useNavigate } from "react-router-dom";
+import { Post, User } from "../../main.types";
+import { skipToken } from '@reduxjs/toolkit/query/react';
 
-export default function PostCard({ pid, readOnly = false }) {
+interface PostCardProps {
+    pid: string;
+    readOnly?: boolean;
+}
+
+export default function PostCard({ pid, readOnly = false }: PostCardProps) {
     const [pageStatus, setPageStatus] = useState("LOADING");
     const [refetchTrigger, setRefetchTrigger] = useState(0);
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
-    const user = useSelector((state) => state.user);
+    const userState = useAppSelector((state) => state.user);
     const {
         data: postData,
         error: postError,
         refetch: refetchPost,
     } = postApi.useGetPostByPidQuery(pid);
     console.log(postData);
-    const { data: userData, error: userError } = userApi.useGetUserByIdQuery(
-        postData?.creator,
-        {
-            skip: !postData,
-        },
-    );
     const [likePost] = postApi.useLikePostMutation();
     const [dislikePost] = postApi.useDislikePostMutation();
     const [unlikePost] = postApi.useUnlikePostMutation();
@@ -41,8 +42,18 @@ export default function PostCard({ pid, readOnly = false }) {
     const [deletePost] = postApi.useDeletePostMutation();
     const { refetch: refetchAllPosts } = postApi.useGetAllPostsQuery();
     const navigate = useNavigate();
+    const [post, setPost] = useState<Post>();
+    const [user, setUser] = useState<User>();
+    const { data: userData, error: userError } = userApi.useGetUserByIdQuery(post?.creator ?? skipToken);
 
     useEffect(() => {
+        if (postData) {
+            setPost(postData);
+        }
+
+        if (userData) {
+            setUser(userData);
+        }
         console.log("useEffect happeining");
         console.log(postData);
         console.log(userData);
@@ -56,7 +67,7 @@ export default function PostCard({ pid, readOnly = false }) {
     const handleLike = () => {
         if (liked) {
             setLiked(false);
-            unlikePost({ pid: pid, uid: user._id })
+            unlikePost({ pid: pid, uid: userState.user!._id })
                 .unwrap()
                 .then((data) => {
                     setRefetchTrigger((current) => current + 1);
@@ -67,7 +78,7 @@ export default function PostCard({ pid, readOnly = false }) {
         } else {
             if (disliked) {
                 setDisliked(false);
-                undislikePost({ pid: pid, uid: user._id })
+                undislikePost({ pid: pid, uid: userState.user!._id })
                     .unwrap()
                     .then((data) => {
                         setRefetchTrigger((current) => current + 1);
@@ -77,7 +88,7 @@ export default function PostCard({ pid, readOnly = false }) {
                     });
             }
             setLiked(true);
-            likePost({ pid: pid, uid: user._id })
+            likePost({ pid: pid, uid: userState.user!._id })
                 .unwrap()
                 .then((data) => {
                     setRefetchTrigger((current) => current + 1);
@@ -91,7 +102,7 @@ export default function PostCard({ pid, readOnly = false }) {
     const handleDislike = () => {
         if (disliked) {
             setDisliked(false);
-            undislikePost({ pid: pid, uid: user._id })
+            undislikePost({ pid: pid, uid: userState.user!._id })
                 .unwrap()
                 .then((data) => {
                     setRefetchTrigger((current) => current + 1);
@@ -102,7 +113,7 @@ export default function PostCard({ pid, readOnly = false }) {
         } else {
             if (liked) {
                 setLiked(false);
-                unlikePost({ pid: pid, uid: user._id })
+                unlikePost({ pid: pid, uid: userState.user!._id })
                     .unwrap()
                     .then((data) => {
                         setRefetchTrigger((current) => current + 1);
@@ -112,7 +123,7 @@ export default function PostCard({ pid, readOnly = false }) {
                     });
             }
             setDisliked(true);
-            dislikePost({ pid: pid, uid: user._id })
+            dislikePost({ pid: pid, uid: userState.user!._id })
                 .unwrap()
                 .then((data) => {
                     setRefetchTrigger((current) => current + 1);
@@ -129,8 +140,8 @@ export default function PostCard({ pid, readOnly = false }) {
         }
     }, [refetchTrigger, refetchPost]);
 
-    const getDate = (date) => {
-        const options = {
+    const getDate = (date: string | number | Date): string => {
+        const options: Intl.DateTimeFormatOptions = {
             weekday: "long",
             year: "numeric",
             month: "long",
@@ -159,34 +170,34 @@ export default function PostCard({ pid, readOnly = false }) {
             <Card sx={{ width: 500, height: 600 }}>
                 <CardMedia
                     sx={{ height: 400 }}
-                    image={postData.song.image}
-                    title={postData.song.album}
+                    image={post!.song.image}
+                    title={post!.song.album}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {postData.song.title}
+                        {post!.song.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         Artist:{" "}
-                        {postData.song.artists.map((artist) => artist.name).join(", ")}
+                        {post!.song.artists.map((artist) => artist.name).join(", ")}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Album: {postData.song.album}
+                        Album: {post!.song.album}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Posted by: {userData.firstName} {userData.lastName} on{" "}
-                        {getDate(postData.createdAt)}
+                        Posted by: {user!.firstName} {user!.lastName} on{" "}
+                        {getDate(post!.createdAt)}
                     </Typography>
                 </CardContent>
                 <CardActions>
                     {readOnly && (
                         <Typography variant="body2" color="text.secondary">
-                            Likes: {postData.likes.length}
+                            Likes: {post!.likes.length}
                         </Typography>
                     )}
                     {readOnly && (
                         <Typography variant="body2" color="text.secondary">
-                            Dislikes: {postData.dislikes.length}
+                            Dislikes: {post!.dislikes.length}
                         </Typography>
                     )}
                     {!readOnly && (
@@ -202,7 +213,7 @@ export default function PostCard({ pid, readOnly = false }) {
                                     }}
                                 >
                                     <ThumbUpIcon />
-                                    <p>{postData.likes.length}</p>
+                                    <p>{post!.likes.length}</p>
                                 </Button>
                                 <Button
                                     size="small"
@@ -214,10 +225,10 @@ export default function PostCard({ pid, readOnly = false }) {
                                     }}
                                 >
                                     <ThumbDownIcon />
-                                    <p>{postData.dislikes.length}</p>
+                                    <p>{post!.dislikes.length}</p>
                                 </Button>
                             </div>
-                            {user._id === postData.creator && (
+                            {userState.user!._id === post!.creator && (
                                 <Button size="small" onClick={handleDelete} color="error">
                                     <DeleteIcon />
                                     <p>Delete</p>
