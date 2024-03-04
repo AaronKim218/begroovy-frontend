@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
-import Home from "./appPages/Home";
-import Login from "./appPages/Login";
-import Register from "./appPages/Register";
-import Posts from "./appPages/Posts";
-import Profile from "./appPages/Profile";
-import Unknown from "./appPages/Unknown";
-import ReadOnlyPosts from "./appPages/ReadOnlyPosts";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Posts from "./pages/Posts";
+import Profile from "./pages/Profile";
+import Unknown from "./pages/Unknown";
+import ReadOnlyPosts from "./pages/ReadOnlyPosts";
 import { useAppSelector } from "./hooks/use-redux";
 
 function App() {
